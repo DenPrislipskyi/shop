@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% for device in device_list %}
+    <h4>{{ device.name }}</h4>
+  {% endfor %}
+
+{% endblock %}
