@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="bg-dark">
+      <div class="p-3">
+        <a class="text-black" href="{% url 'device:device-list' %}">All device</a>
+        {% load tags %}
+        {% get_category as categories %}
+
+        {% for category in categories %}
+          <p class="text-white">{{ category.name }}</p>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="col-9">
+    </div>
+  </div>
+</div>
+

@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from device.models import Device, Category, Tag
+
+admin.site.register(Device)
+admin.site.register(Category)
+admin.site.register(Tag)
