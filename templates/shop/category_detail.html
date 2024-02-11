@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>{{ category.name }}</h2>
+
+<ul>
+  {% for device in devices %}
+    <li>{{ device.name }}</li>
+  {% endfor %}
+</ul>
+
+{% endblock %}
