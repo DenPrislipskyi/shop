@@ -1,13 +1,63 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
-<h2>{{ category.name }}</h2>
+<div class="container">
+  <div class="row justify-content-center">
+    {% for device in devices %}
+  <div class="col-md-4 mb-4">
+    <a href="{% url 'device:device-detail' pk=device.id %}" style="text-decoration: none;">
+      <div class="card h-100">
+        {% if device.image %}
+          <img src="{{ device.image.url }}" class="card-img-top" alt="{{ device.name }}" style="width: 100%; height: auto;">
+        {% else %}
+          <img src="{% static 'photos/no_photo.png' %}" alt="no_photo" class="no_photo" style="width: 100%; height: auto;">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ device.name }}</h5>
+          <p class="card-text">Price: {{ device.price }}</p>
+          <form action="{% url 'cart:add-to-cart' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="device_id" value="{{ device.id }}">
+            <button type="submit" class="btn btn-primary">Add to Cart</button>
+          </form>
+        </div>
+      </div>
+    </a>
+  </div>
+  {% if forloop.counter|divisibleby:3 and not forloop.last %}
+    </div><div class="row justify-content-center">
+  {% endif %}
+{% endfor %}
 
-<ul>
-  {% for device in devices %}
-    <li>{{ device.name }}</li>
-  {% endfor %}
-</ul>
+  </div>
+</div>
 
 {% endblock %}
+
+
+
+{#{% extends "base.html" %}#}
+{##}
+{#{% block content %}#}
+{##}
+{#<div class="container">#}
+{#  <div class="row justify-content-center">#}
+{#    {% for device in devices %}#}
+{#      <div class="col-md-4 mb-4">#}
+{#        <div class="card h-100">#}
+{#          <div class="card-body">#}
+{#            <h5 class="card-title">{{ device.name }}</h5>#}
+{#            {% if device.image %}#}
+{#              <img src="{{ device.image.url }}" class="card-img-top" alt="{{ device.name }}" style="width: 100%; height: auto;">#}
+{#            {% endif %}#}
+{#            <p class="card-text">Price: {{ device.price }}</p>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+{#    {% endfor %}#}
+{#  </div>#}
+{#</div>#}
+{##}
+{#{% endblock %}#}

@@ -2,12 +2,12 @@
   <div class="row">
     <div class="bg-dark">
       <div class="p-3">
-        <a class="text-black" href="{% url 'device:device-list' %}">All device</a>
+        <a class="text-white" href="{% url 'device:device-list' %}">All device</a>
         {% load category_tags %}
         {% get_category as categories %}
 
         {% for category in categories %}
-          <p><a href="{% url 'device:device-category' pk=category.id %}">{{ category.name }}</a></p>
+          <p><a class="text-white" href="{% url 'device:device-category' pk=category.id %}">{{ category.name }}</a></p>
         {% endfor %}
       </div>
     </div>
@@ -15,4 +15,3 @@
     </div>
   </div>
 </div>
-

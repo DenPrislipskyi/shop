@@ -1,5 +1,13 @@
+{% load static %}
 <div class="bg-dark mt-3 p-3">
   <ul class="sidebar-nav list-group">
-    <li class="list-group-item"><a class="text-black" href="{% url 'device:device-list' %}">All device</a></li>
+    <li class="list-group-item bg-dark d-flex justify-content-between align-items-center">
+      <a class="text-white" href="{% url 'device:device-list' %}">Home</a>
+      <span class="text-white">
+        <a href="{% url 'cart:cart-list' %}">
+          <img src="{% static 'photos/cart_photo.jpg' %}" alt="Cart Photo" class="cart-photo" style="width: 1cm; height: 1cm;">
+        </a>
+      </span>
+    </li>
   </ul>
 </div>

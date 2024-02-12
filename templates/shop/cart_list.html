@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    {% if cart_list %}
+    {% for device in cart_list %}
+      <div class="col-md-4 mb-4">
+        <div class="card h-100">
+          {% if device.image %}
+            <img src="{{ device.image.url }}" class="card-img-top" alt="{{ device.name }}" style="width: 100%; height: auto;">
+          {% else %}
+            <img src="{% static 'photos/no_photo.png' %}" alt="no_photo" class="no_photo" style="width: 100%; height: auto;">
+          {% endif %}
+          <div class="card-body">
+            <h5 class="card-title">{{ device.name }}</h5>
+            <p class="card-text">Price: {{ device.price }}</p>
+            <form action="{% url 'cart:delete-from-cart' pk=device.id %}" method="POST">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Remove from Cart</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% if forloop.counter|divisibleby:3 and not forloop.last %}
+        </div><div class="row justify-content-center">
+    {% endif %}
+    {% endfor %}
+    {% else %}
+      <h4>Your cart is empty</h4>
+    {% endif %}
+  </div>
+</div>
+
+{% endblock %}
+
+

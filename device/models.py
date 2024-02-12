@@ -9,6 +9,7 @@ class Device(models.Model):
     price = models.PositiveIntegerField()
     category = models.ForeignKey("Category", on_delete=models.CASCADE, related_name="device")
     tag = models.ManyToManyField("Tag", related_name="device")
+    image = models.ImageField(upload_to="upload_models", null=True)
 
     class Meta:
         ordering = ["name"]
