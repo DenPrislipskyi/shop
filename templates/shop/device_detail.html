@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <h5>{{ device.name }}</h5>
+  <h5>{{ device.price }}</h5>
+  {% if device.image %}
+    <img src="{{ device.image.url }}" class="card-img-top" alt="{{ device.name }}" style="width: 100%; height: auto;">
+  {% endif %}
+
+{% endblock %}
