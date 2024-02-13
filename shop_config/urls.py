@@ -23,6 +23,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("device/", include("device.urls", namespace="device")),
     path("cart/", include("cart.urls", namespace="cart")),
+    path("accounts/", include("django.contrib.auth.urls")),
 ]
 
 if settings.DEBUG:
