@@ -3,6 +3,10 @@
 
 {% block content %}
 
+<p><a href="{% url 'device:device-create' %}">Create Device</a></p>
+<p><a href="{% url 'user:user-create' %}">Create User</a></p>
+<p><a href="{% url 'user:user-update' pk=user.id %}">Update User</a></p>
+
 <div class="container">
   <div class="row justify-content-center">
     {% for device in device_list %}
@@ -17,6 +21,8 @@
         <div class="card-body">
           <h5 class="card-title">{{ device.name }}</h5>
           <p class="card-text">Price: {{ device.price }}</p>
+          <a href="{% url 'device:device-update' pk=device.id %}">Update</a>
+          <p><a href="{% url 'device:device-delete' pk=device.id %}">Delete</a></p>
           <form action="{% url 'cart:add-to-cart' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="device_id" value="{{ device.id }}">

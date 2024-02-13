@@ -1,3 +1,4 @@
+from django.urls import reverse_lazy
 from django.views import generic
 
 from device.models import Device, Category
@@ -30,3 +31,27 @@ class DeviceCategoryView(generic.ListView):
 class DeviceDetailView(generic.DetailView):
     model = Device
     template_name = "shop/device_detail.html"
+
+
+class DeviceCreateView(generic.CreateView):
+    model = Device
+    fields = "__all__"
+    template_name = "shop/device_form.html"
+    success_url = reverse_lazy("device:device-list")
+
+
+class DeviceUpdateView(generic.UpdateView):
+    model = Device
+    fields = "__all__"
+    template_name = "shop/device_form.html"
+    success_url = reverse_lazy("device:device-list")
+
+
+class DeviceDeleteView(generic.DeleteView):
+    model = Device
+    success_url = reverse_lazy("device:device-list")
+    template_name = "shop/device_confirm_delete.html"
+
+
+class Index(generic.ListView):
+    pass

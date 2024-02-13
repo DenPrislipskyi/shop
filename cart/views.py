@@ -16,19 +16,12 @@ class CartListView(generic.ListView):
 
     def get_queryset(self):
         user = self.request.user
-        return user.cart.devices.all()
+        # Перевірка, чи існує корзина для поточного користувача
+        if hasattr(user, "cart"):
+            return user.cart.devices.all()
+        return Device.objects.none()
 
 
-# def add_to_cart(request):
-#     if request.method == 'POST':
-#         device_id = request.POST.get('device_id')
-#         if device_id:
-#             device = Device.objects.get(pk=device_id)
-#             # Отримання або створення корзини для поточного користувача
-#             cart, created = Cart.objects.get_or_create(user=request.user)
-#             # Додавання товару до корзини
-#             cart.devices.add(device)
-#     return redirect('device:device-list')
 class AddToCartView(View):
     def post(self, request):
         device_id = request.POST.get("device_id")

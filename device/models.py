@@ -1,3 +1,5 @@
+import uuid
+
 from django.db import models
 
 from manufacturer.models import Manufacturer
@@ -9,7 +11,13 @@ class Device(models.Model):
     price = models.PositiveIntegerField()
     category = models.ForeignKey("Category", on_delete=models.CASCADE, related_name="device")
     tag = models.ManyToManyField("Tag", related_name="device")
-    image = models.ImageField(upload_to="upload_models", null=True)
+    image = models.ImageField(upload_to="upload_models", null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        if self.image:
+            ext = self.image.name.split(".")[-1]
+            self.image.name = f"{uuid.uuid4()}.{ext}"
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ["name"]
